@@ -1,0 +1,53 @@
+version: "3"
+services:
+
+  mariadb:
+    container_name: '${PROJECT_NAME}-mariadb'
+    image: mariadb:10.6
+    restart: 'always'
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mariadb/symfony.cnf:/etc/mysql/conf.d/symfony.cnf
+      - mariadbdata:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PSWD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER_NAME}
+      MYSQL_PASSWORD: ${DB_USER_PSWD}
+  phpserver:
+    container_name: '${PROJECT_NAME}-phpserver'
+    build:
+      context: ./docker/phpserver
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./symfony-app:/var/www/symfony_docker
+    depends_on:
+      - mariadb
+  nginx:
+    container_name: '${PROJECT_NAME}-nginx'
+    image: nginx:stable-alpine
+    ports:
+      - '8080:80'
+    volumes:
+      - ./symfony-app:/var/www/symfony_docker
+      - ./docker/phpserver/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - phpserver
+      - mariadb
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.1
+    container_name: ${PROJECT_NAME}-phpmyadmin
+    ports:
+      - "8081:85"
+    environment:
+      PMA_HOST: mariadb
+      PMA_USER: ${DB_USER_NAME}
+      PMA_PASSWORD: ${DB_USER_PSWD}
+    depends_on:
+      - mariadb
+
+volumes:
+    mariadbdata:
