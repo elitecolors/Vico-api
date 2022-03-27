@@ -1,0 +1,111 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Api_Vico",
+		"_postman_id": "4f91d4d1-db88-3acf-88f1-6f1669bf9fd5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new client ",
+			"request": {
+				"url": "http://localhost:8080/register/client",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NDcwODYzNjAsImV4cCI6MTY4MzA4NjM2MCwicm9sZXMiOlsiSVNfQURNSU4iLCJST0xFX1VTRVIiXSwiZW1haWwiOiJhZG1pbkBtYWlsLmNvbSJ9.nqHe6maHPOJgFb3r4o9elKENNz_hyQ7nCHfnb9T_bcWNNw0Qk6dskxha_C9OsW_WX4CdLPogDb1DaZmN9wHdX2jNMq-wzpDTMEexMWRgXkZBeAwQzwP5zHK39Rn2fQ4XcnDKO8ovph9R7VuK98Tnsm2DnyMKbfVqG7Dt5dE5CRxOPcBk9uBLdoM8GE7v6N1kA8C3laJhplM7DhsT_aZPLMtCCMG7ovgYiKMbnKKjzWrLjwZK1a8IusBJYbgUrPZuoVt3NCnuGHYcI2TJugST2nzw1tM31UkSXqtK1rNVUqt5CflErSlnmPBNnqslUBDsSEdHaiJp0y-Kx5ZBqwTAMg",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\t\"lastname\": \"usern\",\n\t\t\"firstname\": \"test\",\n\t\t\"password\":\"123456\",\n\t\t\"username\": \"sa@mail.com\"\n\t\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Login get token client",
+			"request": {
+				"url": "http://localhost:8080/api/login_check",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NDcwODYzNjAsImV4cCI6MTY4MzA4NjM2MCwicm9sZXMiOlsiSVNfQURNSU4iLCJST0xFX1VTRVIiXSwiZW1haWwiOiJhZG1pbkBtYWlsLmNvbSJ9.nqHe6maHPOJgFb3r4o9elKENNz_hyQ7nCHfnb9T_bcWNNw0Qk6dskxha_C9OsW_WX4CdLPogDb1DaZmN9wHdX2jNMq-wzpDTMEexMWRgXkZBeAwQzwP5zHK39Rn2fQ4XcnDKO8ovph9R7VuK98Tnsm2DnyMKbfVqG7Dt5dE5CRxOPcBk9uBLdoM8GE7v6N1kA8C3laJhplM7DhsT_aZPLMtCCMG7ovgYiKMbnKKjzWrLjwZK1a8IusBJYbgUrPZuoVt3NCnuGHYcI2TJugST2nzw1tM31UkSXqtK1rNVUqt5CflErSlnmPBNnqslUBDsSEdHaiJp0y-Kx5ZBqwTAMg",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\n\t\t\"password\":\"123456\",\n\t\t\"username\": \"sas@mail.com\"\n\t\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "client: rate project",
+			"request": {
+				"url": "http://localhost:8080/api/rating/save",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NDgzNzMwMjcsImV4cCI6MTY0ODM3NjYyNywicm9sZXMiOltdLCJ1c2VybmFtZSI6InNhc0BtYWlsLmNvbSJ9.JLBKgOjHsn9OT4762GNJ-2MHIL26ODE5wYXnWy7NJ0nG6z34tpeAC8DZ_5QIjC5axw9vHIihQ--jTAFWMd6VD9jn_5PC3PzCE5y6uUFaO1EDwdPnCbDveLy2Vi71t3tXFIIeC8D9AdoIykXooO4xVD4wLBCKNIoy_5R3PRcybBalV1wRq2TKJ4OiNwvPjr3hC8-qE_d0ogjFYHr2kW90hs1jQtZy-oBEjJRVzYn-eSzaLA3I5WToJqsCso7pfgN-saTn6bVGP4OnyCh0CvXL4WsxWp0K3gO56b-8LViwCddpD5TWuvhUMDUt2htHxCRaagSaeMfqcj-mmHUOhd-3HQ",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"project_id\":1,\n\t\"ratingData\":\n\t{\n\t\t\"overall_satisfaction\":1,\n\t\t\"communication\": 4,\n\t\t\"quality_of_work\": 2,\n\t\t\"value_for_money\": 3.2,\n\t\t\"review_text\": \"review check %%\"\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "client: update rate project",
+			"request": {
+				"url": "http://localhost:8080/api/rating/update",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NDgzNzMwMjcsImV4cCI6MTY0ODM3NjYyNywicm9sZXMiOltdLCJ1c2VybmFtZSI6InNhc0BtYWlsLmNvbSJ9.JLBKgOjHsn9OT4762GNJ-2MHIL26ODE5wYXnWy7NJ0nG6z34tpeAC8DZ_5QIjC5axw9vHIihQ--jTAFWMd6VD9jn_5PC3PzCE5y6uUFaO1EDwdPnCbDveLy2Vi71t3tXFIIeC8D9AdoIykXooO4xVD4wLBCKNIoy_5R3PRcybBalV1wRq2TKJ4OiNwvPjr3hC8-qE_d0ogjFYHr2kW90hs1jQtZy-oBEjJRVzYn-eSzaLA3I5WToJqsCso7pfgN-saTn6bVGP4OnyCh0CvXL4WsxWp0K3gO56b-8LViwCddpD5TWuvhUMDUt2htHxCRaagSaeMfqcj-mmHUOhd-3HQ",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"project_id\":1,\n\t\"ratingData\":\n\t{\n\t\t\"overall_satisfaction\":1,\n\t\t\"communication\": 4,\n\t\t\"quality_of_work\": 2,\n\t\t\"value_for_money\": 3.2,\n\t\t\"review_text\": \"review check %%\"\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
