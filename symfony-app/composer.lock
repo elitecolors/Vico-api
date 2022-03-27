@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e344042d3f936be1e47539a7f8a14c14",
+    "content-hash": "5d248d21ab6d0b651b1742030aadd5a5",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1833,16 +1833,16 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "v4.8.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "1885d25cd95810b376b670e7f5f23a33c0dda068"
+                "reference": "9cd417efb4cac669ba517f66e9dfd484a4d93001"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/1885d25cd95810b376b670e7f5f23a33c0dda068",
-                "reference": "1885d25cd95810b376b670e7f5f23a33c0dda068",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/9cd417efb4cac669ba517f66e9dfd484a4d93001",
+                "reference": "9cd417efb4cac669ba517f66e9dfd484a4d93001",
                 "shasum": ""
             },
             "require": {
@@ -1901,6 +1901,7 @@
                 "twig/twig-bundle": "For using the Swagger UI.",
                 "willdurand/hateoas-bundle": "For extracting HATEOAS metadata."
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1938,9 +1939,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nelmio/NelmioApiDocBundle/issues",
-                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.8.2"
+                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/master"
             },
-            "time": "2022-01-10T16:10:58+00:00"
+            "time": "2022-03-24T14:14:49+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -10339,6 +10340,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "nelmio/api-doc-bundle": 20,
         "codeception/module-asserts": 20,
         "codeception/module-doctrine2": 20,
         "codeception/module-phpbrowser": 20,

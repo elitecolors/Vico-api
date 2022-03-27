@@ -7,6 +7,8 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Service\RatingService;
 use App\Validator\RatingRequestValidator;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +27,46 @@ class RatingController extends AbstractController
      *      name="_client_rate_project",
      *      methods={"POST"}
      *     )
+     * @OA\Response(
+     *     response=200,
+     *     description="Create a client",
+     *     @OA\JsonContent(
+     *        type="array",
+     *        @OA\Items(ref=@Model(type=Client::class, groups={"full"}))
+     *     )
+     * )
+     * @OA\Response(
+     *     response=401,
+     *     description="forbiden access",
+     * )
+     * @OA\Response(
+     *     response=500,
+     *     description="server internal error",
+     * )
+     * @OA\Parameter(
+     *     name="username",
+     *     in="query",
+     *     description="email username",
+     *     @OA\Schema(type="email")
+     * )
+     * @OA\Parameter(
+     *     name="password",
+     *     in="query",
+     *     description="password + 6 char",
+     *     @OA\Schema(type="string")
+     * )
+     * @OA\Parameter(
+     *     name="firstname",
+     *     in="query",
+     *     description="firstname",
+     *     @OA\Schema(type="string")
+     * )
+     * @OA\Parameter(
+     *     name="lastname",
+     *     in="query",
+     *     description="lastname client",
+     *     @OA\Schema(type="string")
+     * )
      */
     public function rateProject(
         Request $request,
