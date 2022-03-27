@@ -31,6 +31,10 @@ Generate the SSL keys:
 
 chmod -R 777 config/jwt
 
+6- load default data 
+
+    php app/console doctrine:fixtures:load --no-interaction
+
 ### api url 
 http://localhost:8080/api/doc.json
 

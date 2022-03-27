@@ -7,7 +7,6 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Service\RatingService;
 use App\Validator\RatingRequestValidator;
-use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,11 +28,7 @@ class RatingController extends AbstractController
      *     )
      * @OA\Response(
      *     response=200,
-     *     description="Create a client",
-     *     @OA\JsonContent(
-     *        type="array",
-     *        @OA\Items(ref=@Model(type=Client::class, groups={"full"}))
-     *     )
+     *     description="client rate project"
      * )
      * @OA\Response(
      *     response=401,
@@ -44,28 +39,46 @@ class RatingController extends AbstractController
      *     description="server internal error",
      * )
      * @OA\Parameter(
-     *     name="username",
+     *     name="project_id",
      *     in="query",
-     *     description="email username",
-     *     @OA\Schema(type="email")
+     *     description="project id ",
+     *     @OA\Schema(type="int")
      * )
      * @OA\Parameter(
-     *     name="password",
+     *     name="ratingData",
      *     in="query",
-     *     description="password + 6 char",
-     *     @OA\Schema(type="string")
+     *     description="object with rating data",
+     *     @OA\Schema(type="json")
      * )
      * @OA\Parameter(
-     *     name="firstname",
+     *     name="overall_satisfaction",
      *     in="query",
-     *     description="firstname",
-     *     @OA\Schema(type="string")
+     *     description="overall satisfication",
+     *     @OA\Schema(type="float")
      * )
      * @OA\Parameter(
-     *     name="lastname",
+     *     name="communication",
      *     in="query",
-     *     description="lastname client",
-     *     @OA\Schema(type="string")
+     *     description="communication",
+     *     @OA\Schema(type="float")
+     * )
+     * @OA\Parameter(
+     *     name="quality_of_work",
+     *     in="query",
+     *     description="quality of work",
+     *     @OA\Schema(type="float")
+     * )
+     * @OA\Parameter(
+     *     name="value_for_money",
+     *     in="query",
+     *     description="value_for_money ",
+     *     @OA\Schema(type="float")
+     * )
+     * @OA\Parameter(
+     *     name="review_text",
+     *     in="query",
+     *     description="review text",
+     *     @OA\Schema(type="flaot")
      * )
      */
     public function rateProject(
