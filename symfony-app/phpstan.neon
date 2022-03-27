@@ -1,0 +1,12 @@
+parameters:
+  level: 5
+  paths:
+    - %currentWorkingDirectory%/src
+    - %currentWorkingDirectory%/tests
+  symfony:
+    container_xml_path: '%currentWorkingDirectory%/var/cache/dev/App_KernelDevDebugContainer.xml'
+
+  excludes_analyse:
+    - %currentWorkingDirectory%/src/Migrations
+    - %currentWorkingDirectory%/tests
+    - %currentWorkingDirectory%/migrationRelease

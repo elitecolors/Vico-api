@@ -12,7 +12,26 @@
 
 1. Bring up the containers: `docker-compose up -d --build`
 
-2. docker-compose exec phpserver bash
+2. docker-compose exec vicoapi-phpserver /bin/bash 
 
 3. composer install
 
+### api url 
+http://localhost:8080/api/doc.json
+
+### Codeception
+
+    php vendor/bin/codecept build
+
+    php vendor/bin/codecept run api --steps -d
+
+
+### dev command
+
+* php-cs-fixer
+
+    vendor/bin/php-cs-fixer fix --using-cache=no --rules=@Symfony src
+
+* phpstan
+
+  vendor/bin/phpstan analyse

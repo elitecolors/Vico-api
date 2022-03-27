@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220325140338 extends AbstractMigration
+final class Version20220326221457 extends AbstractMigration
 {
-
     public function getDescription(): string
     {
         return '';
@@ -23,21 +19,15 @@ final class Version20220325140338 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-
-
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql(file_get_contents(__DIR__.'/dump.sql'));
-
+        $this->addSql('ALTER TABLE project DROP FOREIGN KEY FK_2FB3D0EE61220EA6');
+        $this->addSql('ALTER TABLE project ADD CONSTRAINT FK_2FB3D0EE61220EA6 FOREIGN KEY (creator_id) REFERENCES member (id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-
-    }
-
-    public function getApplicationRootDir():string
-    {
-        return $this->parameterBag->get('kernel.project_dir');
+        $this->addSql('ALTER TABLE project DROP FOREIGN KEY FK_2FB3D0EE61220EA6');
+        $this->addSql('ALTER TABLE project ADD CONSTRAINT FK_2FB3D0EE61220EA6 FOREIGN KEY (creator_id) REFERENCES client (id)');
     }
 }

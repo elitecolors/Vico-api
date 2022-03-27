@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Vico
+ * Vico.
  *
  * @ORM\Table(name="vico", indexes={@ORM\Index(name="name_idx", columns={"name"})})
  * @ORM\Entity
@@ -63,6 +63,4 @@ class Vico
 
         return $this;
     }
-
-
 }

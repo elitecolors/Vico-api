@@ -2,15 +2,19 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Client
+ * Client.
  *
  * @ORM\Table(name="client", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_70E4FA78F85E0677", columns={"username"})}, indexes={@ORM\Index(name="username_idx", columns={"username"})})
  * @ORM\Entity
  */
-class Client
+class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @var int
@@ -55,6 +59,16 @@ class Client
      * @ORM\Column(name="last_name", type="string", length=96, nullable=false)
      */
     private $lastName;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Rating::class, mappedBy="client")
+     */
+    private $ratings;
+
+    public function __construct()
+    {
+        $this->ratings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -121,5 +135,60 @@ class Client
         return $this;
     }
 
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->username;
+    }
 
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return Collection<int, Rating>
+     */
+    public function getRatings(): Collection
+    {
+        return $this->ratings;
+    }
+
+    public function addRating(Rating $rating): self
+    {
+        if (!$this->ratings->contains($rating)) {
+            $this->ratings[] = $rating;
+            $rating->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRating(Rating $rating): self
+    {
+        if ($this->ratings->removeElement($rating)) {
+            // set the owning side to null (unless already changed)
+            if ($rating->getClient() === $this) {
+                $rating->setClient(null);
+            }
+        }
+
+        return $this;
+    }
 }

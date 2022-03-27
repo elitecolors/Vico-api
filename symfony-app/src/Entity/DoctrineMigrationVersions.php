@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * DoctrineMigrationVersions
+ * DoctrineMigrationVersions.
  *
  * @ORM\Table(name="doctrine_migration_versions")
  * @ORM\Entity
@@ -63,6 +63,4 @@ class DoctrineMigrationVersions
 
         return $this;
     }
-
-
 }
