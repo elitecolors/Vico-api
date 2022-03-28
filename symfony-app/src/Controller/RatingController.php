@@ -12,18 +12,15 @@ use App\Validator\RatingRequestValidator;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @Route("api/rating", name="rating")
  */
-class RatingController extends AbstractController
+class RatingController extends ApiAbstractController
 {
     /**
      * @Route("/save",
@@ -52,12 +49,12 @@ class RatingController extends AbstractController
      *     description="json payload to rate project",
      *       @OA\Schema(type="object",
      *         @OA\Property(property="project_id", type="integer"),
-     *     @OA\Property(type="object",property="dataRating",
-     *          @OA\Property(property="overall_satisfaction", type="double",minLength=0,maxLength=5),
-     *          @OA\Property(property="communication", type="double",minLength=5),
-     *          @OA\Property(property="quality_of_work", type="double",minLength=0,maxLength=5),
-     *          @OA\Property(property="value_for_money", type="double",minLength=0,maxLength=5),
-     *          @OA\Property(property="review_text", type="double",minLength=0,maxLength=5),
+     *          @OA\Property(type="object",property="dataRating",
+     *           @OA\Property(property="overall_satisfaction", type="double",minLength=0,maxLength=5),
+     *           @OA\Property(property="communication", type="double",minLength=5),
+     *           @OA\Property(property="quality_of_work", type="double",minLength=0,maxLength=5),
+     *           @OA\Property(property="value_for_money", type="double",minLength=0,maxLength=5),
+     *           @OA\Property(property="review_text", type="double",minLength=0,maxLength=5),
      *     )
      * )
      * )
@@ -65,9 +62,7 @@ class RatingController extends AbstractController
      */
     public function rateProject(
         Request $request,
-        SerializerInterface $serializer,
         RatingService $ratingService,
-        ValidatorInterface $validator
     ): Response {
         $data = json_decode(
             $request->getContent(),
@@ -78,19 +73,10 @@ class RatingController extends AbstractController
             return new JsonResponse(['error' => 'no data find in request'], Response::HTTP_BAD_REQUEST);
         }
 
-        $requestPayload = $serializer->deserialize(
-            $request->getContent(),
-            RatingRequestValidator::class,
-            'json'
-        );
+        $validationsErrors = $this->validateRequest($request->getContent(), RatingRequestValidator::class);
 
-        $errors = $validator->validate($requestPayload);
-
-        if ($errors->count() > 0) {
-            return new JsonResponse(
-                $errors,
-                Response::HTTP_BAD_REQUEST
-            );
+        if ($validationsErrors->count() > 0) {
+            return $this->createGenericErrorValidationResponse($validationsErrors);
         }
 
         try {
@@ -99,17 +85,13 @@ class RatingController extends AbstractController
             $add = $ratingService->addRating($data, $client);
 
             if (!$add) {
-                return new JsonResponse(
-                    ['error' => 'project not exist or already review added'],
-                    Response::HTTP_INTERNAL_SERVER_ERROR);
+                return $this->createGenericErrorResponse(throw new \Exception('project not exist or already review added'));
             }
         } catch (\Exception $e) {
-            return new JsonResponse(
-                ['error' => $e->getMessage()],
-                Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->createGenericErrorResponse($e);
         }
 
-        return $this->json(['success' => 'rating added !']);
+        return $this->createSuccessfulApiResponse('rating added !');
     }
 
     /**
@@ -139,12 +121,12 @@ class RatingController extends AbstractController
      *     description="json payload to rate project",
      *       @OA\Schema(type="object",
      *         @OA\Property(property="project_id", type="integer"),
-     *     @OA\Property(type="object",property="dataRating",
-     *          @OA\Property(property="overall_satisfaction", type="double",minLength=0,maxLength=5),
-     *          @OA\Property(property="communication", type="double",minLength=5),
-     *          @OA\Property(property="quality_of_work", type="double",minLength=0,maxLength=5),
-     *          @OA\Property(property="value_for_money", type="double",minLength=0,maxLength=5),
-     *          @OA\Property(property="review_text", type="double",minLength=0,maxLength=5),
+     *           @OA\Property(type="object",property="dataRating",
+     *              @OA\Property(property="overall_satisfaction", type="double",minLength=0,maxLength=5),
+     *              @OA\Property(property="communication", type="double",minLength=5),
+     *              @OA\Property(property="quality_of_work", type="double",minLength=0,maxLength=5),
+     *              @OA\Property(property="value_for_money", type="double",minLength=0,maxLength=5),
+     *              @OA\Property(property="review_text", type="double",minLength=0,maxLength=5),
      *     )
      * )
      * )
@@ -152,9 +134,7 @@ class RatingController extends AbstractController
      */
     public function updateRateProject(
         Request $request,
-        SerializerInterface $serializer,
-        RatingService $ratingService,
-        ValidatorInterface $validator
+        RatingService $ratingService
     ): Response {
         $data = json_decode(
             $request->getContent(),
@@ -165,19 +145,10 @@ class RatingController extends AbstractController
             return new JsonResponse(['error' => 'no data find in request'], Response::HTTP_BAD_REQUEST);
         }
 
-        $requestPayload = $serializer->deserialize(
-            $request->getContent(),
-            RatingRequestValidator::class,
-            'json'
-        );
+        $validationsErrors = $this->validateRequest($request->getContent(), RatingRequestValidator::class);
 
-        $errors = $validator->validate($requestPayload);
-
-        if ($errors->count() > 0) {
-            return new JsonResponse(
-                $errors,
-                Response::HTTP_BAD_REQUEST
-            );
+        if ($validationsErrors->count() > 0) {
+            return $this->createGenericErrorValidationResponse($validationsErrors);
         }
 
         try {
@@ -186,16 +157,12 @@ class RatingController extends AbstractController
             $update = $ratingService->updateRating($data, $client);
 
             if (!$update) {
-                return new JsonResponse(
-                    ['error' => 'project not exist or already review added'],
-                    Response::HTTP_INTERNAL_SERVER_ERROR);
+                return $this->createGenericErrorResponse(throw new \Exception('project not exist or already review added'));
             }
         } catch (\Exception $e) {
-            return new JsonResponse(
-                ['error' => $e->getMessage()],
-                Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->createGenericErrorResponse($e);
         }
 
-        return $this->json(['success' => 'rating update ok !']);
+        return $this->createSuccessfulApiResponse('rating update ok !');
     }
 }
