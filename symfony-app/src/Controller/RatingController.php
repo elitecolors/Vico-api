@@ -9,6 +9,8 @@ use App\Entity\Rating;
 use App\Entity\RatingData;
 use App\Service\RatingService;
 use App\Validator\RatingRequestValidator;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,8 +19,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use Nelmio\ApiDocBundle\Annotation\Model;
 
 /**
  * @Route("api/rating", name="rating")

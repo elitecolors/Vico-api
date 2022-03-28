@@ -7,7 +7,6 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Service\ClientService;
 use App\Validator\ClientValidator;
-use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
