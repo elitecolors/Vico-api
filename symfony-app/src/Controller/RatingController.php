@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Entity\Rating;
+use App\Entity\RatingData;
 use App\Service\RatingService;
 use App\Validator\RatingRequestValidator;
 use OpenApi\Annotations as OA;
@@ -15,6 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use Nelmio\ApiDocBundle\Annotation\Model;
 
 /**
  * @Route("api/rating", name="rating")
@@ -28,7 +32,11 @@ class RatingController extends AbstractController
      *     )
      * @OA\Response(
      *     response=200,
-     *     description="client rate project"
+     *     description="client rate project",
+     *     @OA\JsonContent(
+     *        type="array",
+     *        @OA\Items(ref=@Model(type=Rating::class, groups={"full"}))
+     *     )
      * )
      * @OA\Response(
      *     response=401,
@@ -42,7 +50,7 @@ class RatingController extends AbstractController
      *     name="project_id",
      *     in="query",
      *     description="project id ",
-     *     @OA\Schema(type="int")
+     *     @OA\Schema(type="integer")
      * )
      * @OA\Parameter(
      *     name="ratingData",
@@ -80,6 +88,7 @@ class RatingController extends AbstractController
      *     description="review text",
      *     @OA\Schema(type="flaot")
      * )
+     * @Security(name="Bearer")
      */
     public function rateProject(
         Request $request,
@@ -135,6 +144,65 @@ class RatingController extends AbstractController
      *      name="_client_update_rate_project",
      *      methods={"POST"}
      *     )
+     * @OA\Response(
+     *     response=200,
+     *     description="client rate project",
+     *     @OA\JsonContent(
+     *        type="array",
+     *        @OA\Items(ref=@Model(type=RatingData::class, groups={"full"}))
+     *     )
+     * )
+     * @OA\Response(
+     *     response=401,
+     *     description="forbiden access",
+     * )
+     * @OA\Response(
+     *     response=500,
+     *     description="server internal error",
+     * )
+     * @OA\Parameter(
+     *     name="project_id",
+     *     in="query",
+     *     description="project id ",
+     *     @OA\Schema(type="integer")
+     * )
+     * @OA\Parameter(
+     *     name="ratingData",
+     *     in="query",
+     *     description="object with rating data",
+     *     @OA\Schema(type="json")
+     * )
+     * @OA\Parameter(
+     *     name="overall_satisfaction",
+     *     in="query",
+     *     description="overall satisfication",
+     *     @OA\Schema(type="float")
+     * )
+     * @OA\Parameter(
+     *     name="communication",
+     *     in="query",
+     *     description="communication",
+     *     @OA\Schema(type="float")
+     * )
+     * @OA\Parameter(
+     *     name="quality_of_work",
+     *     in="query",
+     *     description="quality of work",
+     *     @OA\Schema(type="float")
+     * )
+     * @OA\Parameter(
+     *     name="value_for_money",
+     *     in="query",
+     *     description="value_for_money ",
+     *     @OA\Schema(type="float")
+     * )
+     * @OA\Parameter(
+     *     name="review_text",
+     *     in="query",
+     *     description="review text",
+     *     @OA\Schema(type="flaot")
+     * )
+     * @Security(name="Bearer")
      */
     public function updateRateProject(
         Request $request,
