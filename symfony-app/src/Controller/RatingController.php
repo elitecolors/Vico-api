@@ -53,40 +53,16 @@ class RatingController extends AbstractController
      *     @OA\Schema(type="integer")
      * )
      * @OA\Parameter(
-     *     name="ratingData",
+     *     name="dataRating",
      *     in="query",
-     *     description="object with rating data",
-     *     @OA\Schema(type="json")
-     * )
-     * @OA\Parameter(
-     *     name="overall_satisfaction",
-     *     in="query",
-     *     description="overall satisfication",
-     *     @OA\Schema(type="float")
-     * )
-     * @OA\Parameter(
-     *     name="communication",
-     *     in="query",
-     *     description="communication",
-     *     @OA\Schema(type="float")
-     * )
-     * @OA\Parameter(
-     *     name="quality_of_work",
-     *     in="query",
-     *     description="quality of work",
-     *     @OA\Schema(type="float")
-     * )
-     * @OA\Parameter(
-     *     name="value_for_money",
-     *     in="query",
-     *     description="value_for_money ",
-     *     @OA\Schema(type="float")
-     * )
-     * @OA\Parameter(
-     *     name="review_text",
-     *     in="query",
-     *     description="review text",
-     *     @OA\Schema(type="flaot")
+     *     description="json payload to rate project",
+     *       @OA\Schema(type="object",
+     *          @OA\Property(property="overall_satisfaction", type="double",minLength=0,maxLength=5),
+     *         @OA\Property(property="communication", type="double",minLength=5),
+     *         @OA\Property(property="quality_of_work", type="double",minLength=0,maxLength=5),
+     *         @OA\Property(property="value_for_money", type="double",minLength=0,maxLength=5),
+     *         @OA\Property(property="review_text", type="double",minLength=0,maxLength=5),
+     *     )
      * )
      * @Security(name="Bearer")
      */
@@ -173,34 +149,16 @@ class RatingController extends AbstractController
      *     @OA\Schema(type="json")
      * )
      * @OA\Parameter(
-     *     name="overall_satisfaction",
+     *     name="dataRating",
      *     in="query",
-     *     description="overall satisfication",
-     *     @OA\Schema(type="float")
-     * )
-     * @OA\Parameter(
-     *     name="communication",
-     *     in="query",
-     *     description="communication",
-     *     @OA\Schema(type="float")
-     * )
-     * @OA\Parameter(
-     *     name="quality_of_work",
-     *     in="query",
-     *     description="quality of work",
-     *     @OA\Schema(type="float")
-     * )
-     * @OA\Parameter(
-     *     name="value_for_money",
-     *     in="query",
-     *     description="value_for_money ",
-     *     @OA\Schema(type="float")
-     * )
-     * @OA\Parameter(
-     *     name="review_text",
-     *     in="query",
-     *     description="review text",
-     *     @OA\Schema(type="flaot")
+     *     description="json payload to rate project",
+     *       @OA\Schema(type="object",
+     *          @OA\Property(property="overall_satisfaction", type="double",minLength=0,maxLength=5),
+     *         @OA\Property(property="communication", type="double",minLength=5),
+     *         @OA\Property(property="quality_of_work", type="double",minLength=0,maxLength=5),
+     *         @OA\Property(property="value_for_money", type="double",minLength=0,maxLength=5),
+     *         @OA\Property(property="review_text", type="double",minLength=0,maxLength=5),
+     *     )
      * )
      * @Security(name="Bearer")
      */

@@ -38,28 +38,15 @@ class RegisterController extends AbstractController
      *     description="server internal error",
      * )
      * @OA\Parameter(
-     *     name="username",
+     *     name="json",
      *     in="query",
-     *     description="email username",
-     *     @OA\Schema(type="email")
-     * )
-     * @OA\Parameter(
-     *     name="password",
-     *     in="query",
-     *     description="password + 6 char",
-     *     @OA\Schema(type="string")
-     * )
-     * @OA\Parameter(
-     *     name="firstname",
-     *     in="query",
-     *     description="firstname",
-     *     @OA\Schema(type="string")
-     * )
-     * @OA\Parameter(
-     *     name="lastname",
-     *     in="query",
-     *     description="lastname client",
-     *     @OA\Schema(type="string")
+     *     description="json payload to create client",
+     *       @OA\Schema(type="object",
+     *          @OA\Property(property="username", type="string"),
+     *         @OA\Property(property="password", type="string",description="password + 6 char",minLength=6),
+     *         @OA\Property(property="firstname", type="string"),
+     *         @OA\Property(property="lastname", type="string")
+     *     )
      * )
      */
     public function registerClient(
