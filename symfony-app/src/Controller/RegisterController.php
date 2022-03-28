@@ -27,11 +27,7 @@ class RegisterController extends AbstractController
      *     )
      * @OA\Response(
      *     response=200,
-     *     description="Create a client",
-     *     @OA\JsonContent(
-     *        type="array",
-     *        @OA\Items(ref=@Model(type=Client::class, groups={"full"}))
-     *     )
+     *     description="Create a client"
      * )
      * @OA\Response(
      *     response=401,

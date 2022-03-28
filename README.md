@@ -64,3 +64,6 @@ update token after check login
 
 ### api doc 
 http://localhost:8080/api/doc.json
+
+### swagger_ui
+http://localhost:8080/api/doc
