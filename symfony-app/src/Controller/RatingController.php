@@ -47,22 +47,19 @@ class RatingController extends AbstractController
      *     description="server internal error",
      * )
      * @OA\Parameter(
-     *     name="project_id",
-     *     in="query",
-     *     description="project id ",
-     *     @OA\Schema(type="integer")
-     * )
-     * @OA\Parameter(
-     *     name="dataRating",
+     *     name="rating",
      *     in="query",
      *     description="json payload to rate project",
      *       @OA\Schema(type="object",
+     *         @OA\Property(property="project_id", type="integer"),
+     *     @OA\Property(type="object",property="dataRating",
      *          @OA\Property(property="overall_satisfaction", type="double",minLength=0,maxLength=5),
-     *         @OA\Property(property="communication", type="double",minLength=5),
-     *         @OA\Property(property="quality_of_work", type="double",minLength=0,maxLength=5),
-     *         @OA\Property(property="value_for_money", type="double",minLength=0,maxLength=5),
-     *         @OA\Property(property="review_text", type="double",minLength=0,maxLength=5),
+     *          @OA\Property(property="communication", type="double",minLength=5),
+     *          @OA\Property(property="quality_of_work", type="double",minLength=0,maxLength=5),
+     *          @OA\Property(property="value_for_money", type="double",minLength=0,maxLength=5),
+     *          @OA\Property(property="review_text", type="double",minLength=0,maxLength=5),
      *     )
+     * )
      * )
      * @Security(name="Bearer")
      */
@@ -137,28 +134,19 @@ class RatingController extends AbstractController
      *     description="server internal error",
      * )
      * @OA\Parameter(
-     *     name="project_id",
-     *     in="query",
-     *     description="project id ",
-     *     @OA\Schema(type="integer")
-     * )
-     * @OA\Parameter(
-     *     name="ratingData",
-     *     in="query",
-     *     description="object with rating data",
-     *     @OA\Schema(type="json")
-     * )
-     * @OA\Parameter(
-     *     name="dataRating",
+     *     name="rating",
      *     in="query",
      *     description="json payload to rate project",
      *       @OA\Schema(type="object",
+     *         @OA\Property(property="project_id", type="integer"),
+     *     @OA\Property(type="object",property="dataRating",
      *          @OA\Property(property="overall_satisfaction", type="double",minLength=0,maxLength=5),
-     *         @OA\Property(property="communication", type="double",minLength=5),
-     *         @OA\Property(property="quality_of_work", type="double",minLength=0,maxLength=5),
-     *         @OA\Property(property="value_for_money", type="double",minLength=0,maxLength=5),
-     *         @OA\Property(property="review_text", type="double",minLength=0,maxLength=5),
+     *          @OA\Property(property="communication", type="double",minLength=5),
+     *          @OA\Property(property="quality_of_work", type="double",minLength=0,maxLength=5),
+     *          @OA\Property(property="value_for_money", type="double",minLength=0,maxLength=5),
+     *          @OA\Property(property="review_text", type="double",minLength=0,maxLength=5),
      *     )
+     * )
      * )
      * @Security(name="Bearer")
      */
